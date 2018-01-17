@@ -1,16 +1,25 @@
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
-const reducer = function(state, action) {
-  if(action.type  === "INC") {
-    return state + action.payload;
-  }
-  if(action.type  === "DEC") {
-    return state - action.payload;
-  }
+const userReducer = (state={}, actions) => {
   return state;
 }
 
-const store = createStore(reducer, 0);
+const tweetsReducer = (state={}, actions) => {
+  return state;
+}
+
+const reducers = combineReducers({
+  user: userReducer, 
+  tweets: tweetsReducer
+});
+
+const store = createStore(reducers, {
+  user : {
+    name: "Ashot", 
+    age: 32
+  },
+  tweets : []
+});
 
 store.subscribe(() => {
   console.log("store changed", store.getState());
