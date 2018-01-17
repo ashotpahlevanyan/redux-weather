@@ -46,7 +46,7 @@ const store = createStore(reducer, middleware);
 
 store.dispatch((dispatch) => {
   dispatch({type: "FETCH_USERS_START"});
-  axios.get('http://rest.learncode.academy/api/ashotpahlevanyan/users')
+  axios.get('http://rest.leardhgfjhncode.academy/api/ashotpahlevanyan/users')
   .then((response) => {
     dispatch({type: "RECEIVE_USERS", payload: response.data});
   })
