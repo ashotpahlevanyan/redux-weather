@@ -1,8 +1,42 @@
 import { applyMiddleware, createStore } from 'redux';
+import axios from 'axios'; //XHR requests are done with axios
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-const reducer = (state=0, action) => {
-  
+
+const initialState = {
+  fetching: false,
+  fetched: false,
+  users: [],
+  error: null
+}
+const reducer = (state=initialState, action) => {
+  switch (action.type) {
+    case "FETCH_USERS_START" : {
+      return {
+        ...state,
+        fetching : true
+      };
+      break;
+    }
+    case "FETCH_USERS_ERROR" : {
+      return {
+        ...state,
+        fetching : false,
+        error: action.payload
+      };
+      break;
+    }
+    case "RECEIVE_USERS" : {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        users: action.payload
+      };
+      break;
+    }
+
+  }
   return state;
 }
 
@@ -11,7 +45,12 @@ const middleware = applyMiddleware(thunk, logger());
 const store = createStore(reducer, middleware); 
 
 store.dispatch((dispatch) => {
-  dispatch({type: "FOO"}); //dispatch some action, e g, started ajax call
-  // do something async here , e.g. make the actional ajax call here
-  dispatch({type: "BAR"});  // dispatch again e.g. ended ajax call
+  dispatch({type: "FETCH_USERS_START"});
+  axios.get('http://rest.learncode.academy/api/ashotpahlevanyan/users')
+  .then((response) => {
+    dispatch({type: "RECEIVE_USERS", payload: response.data});
+  })
+  .catch((err) => {
+    dispatch({type: "FETCH_USERS_ERROR", payload: err})
+  })
 });
