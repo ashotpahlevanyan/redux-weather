@@ -10,4 +10,8 @@ const middleware = applyMiddleware(logger());
 
 const store = createStore(reducer, middleware); 
 
-store.dispatch({type: "FOO"});
+store.dispatch((dispatch) => {
+  dispatch({}); //dispatch some action, e g, started ajax call
+  // do something async here , e.g. make the actional ajax call here
+  dispatch({});  // dispatch again e.g. ended ajax call
+});
