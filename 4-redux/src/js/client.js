@@ -11,7 +11,7 @@ const middleware = applyMiddleware(thunk, logger());
 const store = createStore(reducer, middleware); 
 
 store.dispatch((dispatch) => {
-  dispatch({}); //dispatch some action, e g, started ajax call
+  dispatch({type: "FOO"}); //dispatch some action, e g, started ajax call
   // do something async here , e.g. make the actional ajax call here
-  dispatch({});  // dispatch again e.g. ended ajax call
+  dispatch({type: "BAR"});  // dispatch again e.g. ended ajax call
 });
