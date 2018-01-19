@@ -21,11 +21,17 @@
     "redux-logger": "^2.6.1",
     "redux-promise-middleware": "^3.2.0",
     "redux-thunk": "^2.1.0",
-    "webpack": "^1.12.9",
+    "webpack": "^1.15",
     "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
-    "react-redux": "^4.4.8"
+    "css-loader": "^0.28.9",
+    "node-sass": "^4.7.2",
+    "react-redux": "^4.4.8",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "weathericons": "^2.1.0",
+    "webpack": "^1.15.0"
   },
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot",
